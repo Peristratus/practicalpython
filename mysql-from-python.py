@@ -8,9 +8,9 @@ connection = pymysql.connect(host = 'localhost',
                              db= 'Chinook')
 try:
     with connection.cursor() as cursor:
-        sql ="Select * From Artist;"
-        cursor.execute(sql)
-        result =cursor.fetchall()
-        print(result)
+     list_of_names = ['Fred','fred']
+     format_strings = ','.join(['%s']*len(list_of_names))
+     cursor.execute("DELETE FROM Friends WHERE name in  ({});".format(format_strings),list_of_names)       
+     connection.commit()
 finally:
-    connection.close()
+    connection.close() 
